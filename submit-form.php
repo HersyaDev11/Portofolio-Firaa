@@ -3,7 +3,7 @@
 $servername = "localhost";
 $username = "root"; // Ganti sesuai dengan username database Anda
 $password = ""; // Ganti sesuai dengan password database Anda
-$database = "db_portofolio.sql"; // Ganti dengan nama database Anda
+$database = "db_portofolio"; // Ganti dengan nama database Anda
 
 $conn = new mysqli($servername, $username, $password, $database);
 
@@ -13,13 +13,13 @@ if ($conn->connect_error) {
 }
 
 // Ambil data dari form
-$name = $_POST['nama'];
+$nama = $_POST['name'];
 $email = $_POST['email'];
 $pesan = $_POST['pesan'];
 
 // Gunakan prepared statement untuk mencegah SQL injection
-$stmt = $conn->prepare("INSERT INTO contacts (nama, email, pesan) VALUES (?, ?, ?)");
-$stmt->bind_param("sss", $name, $email, $pesan);
+$stmt = $conn->prepare("INSERT INTO contacts (name, email, pesan) VALUES (?, ?, ?)");
+$stmt->bind_param("sss", $nama, $email, $pesan);
 
 if ($stmt->execute()) {
     echo "<script>alert('Data berhasil disimpan!'); window.location.href='index.php';</script>";
